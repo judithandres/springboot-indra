@@ -13,14 +13,24 @@ public class Cliente  implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	private String nombre, apellido, email;
+	@Column(nullable=false)
+	private String nombre;
+	
+	@Column(nullable=false)
+	private String apellido;
+	
+	@Column(nullable=false, unique=true)
+	private String email;
 		
+	
 	private int telefono;
 	
 	@Column(name="create_at")
 	@Temporal(TemporalType.DATE)
-	
 	private Date createAt;
+	
+	
+	private String imagen;
 	
 	@PrePersist
 	public void PrePersist() {
@@ -45,6 +55,8 @@ public class Cliente  implements Serializable {
 	public void setTelefono(int telefono) {this.telefono = telefono;}
 	public Date getCreateAt() {return createAt;}
 	public void setCreateAt(Date createAt) {this.createAt = createAt;}
+	public String getImagen() {return imagen;}
+	public void setImagen(String imagen) {this.imagen = imagen;}
 
 
 
