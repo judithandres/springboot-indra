@@ -1,0 +1,12 @@
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("Jose", "Perez", "jp@email.com", 454241);
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("Rosa", "Melano", "rm@email.com", 123456);
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("Marina", "Gutierrez", "mg@email.com", 213455);
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("Pedro", "Lopez", "ol@email.com", 556677);
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("Juan", "Martin", "jm@email.com", 908765);
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("Alba", "Sanchez", "as@email.com", 123411);
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("Laura", "Calvo", "lc@email.com", 112233);
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("Natalia", "Mate", "nm@email.com", 445566);
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("David", "Cristobal", "dc@email.com", 778899);
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("Alvaro", "Dominguez", "ad@email.com", 101112);
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("Hector", "Fernandez", "hf@email.com", 121314);
+INSERT INTO clientes (nombre, apellido, email, telefono) VALUES("Marino", "Nieto", "mn@email.com", 151617);
