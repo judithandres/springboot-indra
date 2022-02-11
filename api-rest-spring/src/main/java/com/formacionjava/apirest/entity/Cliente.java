@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "clientes")
 public class Cliente  implements Serializable {
@@ -32,6 +34,13 @@ public class Cliente  implements Serializable {
 	
 	private String imagen;
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="region_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Region region;
+	
+	
+	
 	@PrePersist
 	public void PrePersist() {
 		if(createAt==null) {
@@ -42,7 +51,6 @@ public class Cliente  implements Serializable {
 
 	
 	//GETTERS Y SETTERS
-
 	public long getId() {return id;}
 	public void setId(long id) {this.id = id;}
 	public String getNombre() {return nombre;}
@@ -57,8 +65,8 @@ public class Cliente  implements Serializable {
 	public void setCreateAt(Date createAt) {this.createAt = createAt;}
 	public String getImagen() {return imagen;}
 	public void setImagen(String imagen) {this.imagen = imagen;}
-
-
+	public Region getRegion() {return region;}
+	public void setRegion(Region region) {this.region = region;}
 
 
 

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.formacionjava.apirest.dao.ClienteDao;
 import com.formacionjava.apirest.entity.Cliente;
+import com.formacionjava.apirest.entity.Region;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
@@ -39,6 +40,11 @@ public class ClienteServiceImpl implements ClienteService {
 		
 		clienteDao.deleteById(id);
 		
+	}
+	@Override
+	@Transactional
+	public List<Region> findAllRegiones() {
+		return clienteDao.findAllRegiones();
 	}
 	
 	

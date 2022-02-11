@@ -2,19 +2,24 @@ package com.formacionjava.apirest.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.formacionjava.apirest.entity.Cliente;
+import com.formacionjava.apirest.entity.Region;
 import com.formacionjava.apirest.service.ClienteService;
 
 @RestController
@@ -114,6 +119,7 @@ public class ClienteController {
 					clienteActual.setEmail(cliente.getEmail());
 					clienteActual.setTelefono(cliente.getTelefono());
 					clienteActual.setCreateAt(cliente.getCreateAt());
+					clienteActual.setRegion(cliente.getRegion());
 					
 					servicio.save(clienteActual);
 					
@@ -187,7 +193,7 @@ public class ClienteController {
 		}
 		
 		
-		@PostMapping("/clientes/upload")
+		@PostMapping("/clientes/uploads")
 		public ResponseEntity<?>uploadImagen(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id") Long id){
 					
 			Map<String,Object> response = new HashMap<>();
@@ -235,7 +241,41 @@ public class ClienteController {
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.OK);
 
 			}
+		
+		@GetMapping("/clientes/uploads/img/{nombreImagen:.+}")
+		public ResponseEntity<?> verImagen(@PathVariable String nombreImagen){
+		
+			Path rutaArchivo = Paths.get("uploads").resolve(nombreImagen).toAbsolutePath();
 			
+			Resource recurso = null;
+			
+			try {
+				recurso  = new UrlResource(rutaArchivo.toUri());
+			} catch(MalformedURLException e) {
+				
+				e.printStackTrace();
+			}
+			if(!recurso.exists()&&!recurso.isReadable()) {
+				throw new RuntimeException("Error no se puede cargar la imagen " + nombreImagen);
+			}
+			HttpHeaders cabecera = new HttpHeaders();
+			cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=\""+recurso.getFilename());
+			
+			return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
+		}
+			
+		
+		@GetMapping("/clientes/regiones")
+		public List<Region>listaRegiones(){
+			
+			return servicio.findAllRegiones();
+		}
+		
+		
+		
+		
+		
+		
 		}
 		
 		
